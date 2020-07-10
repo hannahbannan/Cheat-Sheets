@@ -1,6 +1,6 @@
-#Express
+# Express
 
-###Basic Set Up
+### Basic Set Up
 
 **Terminal commands**
 ```js
@@ -21,6 +21,26 @@ npm i express
 // + installs additional modules and adds package-lock.json
 ```
 
+```js
+npm i dotenv
+touch .env
+//installs and creates local envorionment file
+```
+
+```js
+touch.gitignore
+    echo
+    /node_modules
+    .DS_Store
+    .env >>.gitignore
+//creates git ignore file and imports approprate data
+```
+
+**In `.env`**
+```js
+PORT = 3000;
+```
+
 **In `server.js`**
 Express uses `require` rather than `import` as seen in React and some other frameworks.
 ```js
@@ -34,4 +54,9 @@ const port = process.env.PORT || 3000
 // above will be used with dotenv 
 // tells what port we are going to  be using
 ```
+**Option: In `package.json` `scripts`**
+```js
+"dev": "nodemon server.js"
+```
+
 

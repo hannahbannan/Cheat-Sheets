@@ -11,8 +11,8 @@ touch app.js
 npm init -y
 // Similarly to Express Set UP:
 // initializes node, adds package.json where
-    scripts: "main":"server.js"
-    // if server.js is not created prior, 
+    scripts: "main":"apps.js"
+    // if apps.js is not created prior, 
     // main will be "index.js" by default
 ```
 
@@ -23,6 +23,7 @@ npm i mongoose
   "dependencies": {
     "mongoose": "^5.9.22"
   }
+mkdir model
 touch modelname.js
 // This file will hold the SCHEMA
 ```
@@ -89,12 +90,16 @@ Create a new Schema that will define what the document format will be - it defin
 ```js
 const mySchema = new Schema(
     {
+        //set basic field value types
         prop1: String,
         prop2: String,
+        //set default values
         prop3: {type: Number, default: 0},
         prop4: {type: Boolean, default: true},
+        //set field as required
         prop5: {type: Number, require: true}
     },
+    //adds time stamps
     {timestamps: true}
 )
 
@@ -204,19 +209,28 @@ ModelName.find({}, "prop1 prop2", (error, doc) => {
     console.log(doc);
 });
 ```
-
+Add field and value to find condition
 ```js
 ModelName.find({prop1:'Lorem Ipsum'}, (error, doc) => {
     console.log(doc);
 });
 ```
-
+Find by nested object fields
+```js
+ModelName.find({'prop5.subprop1': 20}, (error, docs) => {
+    console.log(docs);
+});
+// requires quotes around keys
+```
+Using Operators
 ```js
 ModelName.find({prop5:{$gte: 20}}, (error, docs) => {
     console.log(docs);
 });
 // $gte is a mongoose command that stands for "greater than or equal"
 ```
+
+
 - `findById()` uses the ObjectID (can be used for Show Routes)
 - `findOne()` stops at the first document that meets serch criteria
 - `where()` is used in a query builder (second code block below) to specify nested properties:
